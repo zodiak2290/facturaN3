@@ -12,15 +12,14 @@
             @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Listado de empresas registradas</div>
-
+    {{$empresas}}
                 <div class="panel-body">
-
-                		{{Auth::user()}}
-
 					@if ( !count($empresas) )
 						<div class="alert alert-info" role="alert">
 							Registra tu empresa   <a href="{{ url('empresas/create') }}" class="alert-link">Aquí. </a>
 						</div>
+                    @else
+                        Bienvenido
                 	@endif
                 </div>
             </div>

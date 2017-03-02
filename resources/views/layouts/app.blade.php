@@ -52,6 +52,11 @@
                         @if (Auth::guest())
                             <li><a href="{{ route('register') }}">Registrarme</a></li>
                         @else
+                            @if ( !Request::is('home') ) 
+                                <li>
+                                    <a href="{{url('home') }}">Home</a>
+                                </li>
+                            @endif
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->email }} <span class="caret"></span>

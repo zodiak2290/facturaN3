@@ -16,10 +16,10 @@ class CrearTablaDatosExtraSucursal extends Migration
         Schema::create('datosExtraSucursal', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('sucursal_id')->unsigned();
-            $table->string('entreca',250);
-            $table->string('telefono1',45);
-            $table->string('telefono2',45);
-            $table->string('email',180);
+            $table->string('entreca',250)->nullable();
+            $table->string('telefono1',45)->nullable();
+            $table->string('telefono2',45)->nullable();
+            $table->string('email',180)->nullable();
             $table->foreign('sucursal_id')
                 ->references('id')
                 ->on('sucursales')->onDelete('cascade');

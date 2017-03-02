@@ -19,5 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(tipoDocumentos::class);
         $this->call(EventosSistemaSeed::class);
         $this->call(EstadosFactura::class);
+
+        factory(App\User::class)->create();
     }
 }
