@@ -44,4 +44,25 @@ class Empresa extends Model
         return DB::table('estados')
                      ->get();
     }
+
+    public function getConfig($id){
+        $sucursalMatriz = DB::table('empresas')
+                ->join('sucursales', 'empresas.id','=', 'sucursales.empresa_id')
+                ->leftJoin('sellos', 'sucursal_id','sellos.id')
+                ->where('empresas.id', '=', $id)
+                ->where('isMatriz','=', true)
+                ->select('*')
+                ->get()->first();
+        return $sucursalMatriz;
+    }
+
+    public function getMatriz($id){
+        $sucursalMatriz = DB::table('empresas')
+                ->join('sucursales', 'empresas.id','=', 'sucursales.empresa_id')
+                ->where('empresas.id', '=', $id)
+                ->where('isMatriz','=', true)
+                ->select('*')
+                ->get()->first();
+        return $sucursalMatriz;   
+    }
 }

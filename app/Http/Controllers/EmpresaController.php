@@ -26,7 +26,10 @@ class EmpresaController extends Controller
      */
     public function index()
     {
-        return Redirect::to('/home');
+        $id = \Auth::user()->id;
+        $empresas = Empresa::where('user_id', $id)->get();
+       
+        return view('empresas/index', ['empresas' => $empresas]);
     }
 
     /**
@@ -111,7 +114,30 @@ class EmpresaController extends Controller
      */
     public function show($id)
     {
-        return view('empresas.show', ['empresas' => Empresa::findOrFail($id)]);
+        $empresa = Empresa::find($id);
+        if ( $empresa) {
+            $matrizConf = (new Empresa())->getConfig($id);
+            $color = $matrizConf->color == 'rgb(61,82,112)';
+            if( $matrizConf->cert && !$color){
+            //preguntar si esta configurado    
+            
+                $mostrarSidebar = true;
+                
+                $data = array(
+                    'empresas' => $empresa,
+                    'mostrarSidebar' => $mostrarSidebar
+                );
+                
+                return view('empresas.show', $data);
+            
+            }else{
+                $sucursal = (new Empresa())->getMatriz($id);
+                //var_dump($sucursales->sucursal);
+                return view('configuracion.edit', ['sucursal' => $sucursal->sucursal]);
+            }
+        }else{
+            return Redirect::to('/home');
+        }
     }
 
     /**
