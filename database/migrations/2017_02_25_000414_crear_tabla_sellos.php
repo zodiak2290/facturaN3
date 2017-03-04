@@ -18,10 +18,9 @@ class CrearTablaSellos extends Migration
             $table->string('cert',100);
             $table->string('keyo',100);
             $table->string('pass',100);
-            $table->string('certpem',100);
-            $table->string('keypem',100);
-            $table->dateTime('fecha_hora');
-            $table->string('serie', 30);
+            $table->string('certpem',100)->nullable();
+            $table->string('keypem',100)->nullable();
+            $table->string('serie', 30)->nullable();
             $table->integer('sucursal_id')->unsigned();
             $table->foreign('sucursal_id')
                 ->references('id')

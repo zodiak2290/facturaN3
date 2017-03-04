@@ -65,4 +65,31 @@ class Empresa extends Model
                 ->get()->first();
         return $sucursalMatriz;   
     }
+
+    public function getMatrices($userId)
+    {
+        $sucursalesMatriz = DB::table('empresas')
+                ->join('sucursales', 'empresas.id','=', 'sucursales.empresa_id')
+                ->where('empresas.user_id', '=', $userId)
+                ->where('isMatriz','=', true)
+                ->select('*')
+                ->get();
+        return $sucursalesMatriz;  
+    }
+
+
+    public function getIdSucursal($idempresa)
+    {
+        $idsucursal = DB::table('empresas')
+        ->join('sucursales', 'empresas.id','=', 'sucursales.empresa_id')
+        ->where('empresas.id', '=', $idempresa)
+        ->where('isMatriz','=', true)
+        ->select('sucursales.id')
+        ->get()->first();
+        return $idsucursal; 
+    }
 }
+
+
+
+

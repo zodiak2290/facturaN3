@@ -89,7 +89,7 @@
 	            </section>
 	            <section id="domFiscal">
 					<div class="col-lg-12">
-       				 	<legend ><H4>Domicilio Fiscal</H4></legend>
+       				 	<legend ><h5>Domicilio Fiscal</h5></legend>
        				</div>
    				 	<div class="row">
        				 	<div class="col-lg-4 col-xs-12 paddingCero" >
@@ -208,7 +208,7 @@
 	            </section>
 	            <section id="adicioanl">
 					<div class="col-lg-12">
-       				 	<legend ><H4>Información Adicional</H4></legend>
+       				 	<legend ><h5>Información Adicional</h5></legend>
        				 	<div class="row">
        				 		<div class="col-lg-6">
        				 			<div class="col-lg-12 col-xs-12 paddingCero" >
@@ -243,7 +243,7 @@
 									<div class="form-group{{ $errors->has('leyenda') ? ' has-error' : '' }}">
 										<label for="leyenda" class="col-md-3 control-label"> Leyenda PDF</label>
 			                            <div class="col-lg-9">
-			                                <textarea id="leyenda"  class="form-control input-sm" name="leyenda" value="{{ old('leyenda') }}" rows="10" style="max-width: 100%" ></textarea>
+			                                <textarea id="leyenda"  class="form-control input-sm" name="leyenda" value="{{ old('leyenda') }}" rows="5" style="max-width: 100%" ></textarea>
 			                                @if ($errors->has('email'))
 			                                    <span class="help-block">
 			                                        <strong>{{ $errors->first('email') }}</strong>

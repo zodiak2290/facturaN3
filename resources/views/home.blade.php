@@ -20,7 +20,7 @@
                         <div class="col-lg-6 col-sm-12">
                             <div class="tile">
                                 <h3 class="tile-title">
-                                    Sucursales
+                                    Empresas
                                 </h3>
                                 <a href="{{ url('empresas') }}" class="btn btn-primary btn-large btn-block" >
                                     Ver

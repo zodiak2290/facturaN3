@@ -20,3 +20,5 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('empresas', 'EmpresaController');
+
+Route::post('uploadcert', 'CertificadoController@index');

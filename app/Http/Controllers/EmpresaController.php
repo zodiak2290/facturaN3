@@ -28,7 +28,8 @@ class EmpresaController extends Controller
     {
         $id = \Auth::user()->id;
         $empresas = Empresa::where('user_id', $id)->get();
-       
+        //$empresas = (new Empresa())->getMatrices($id);
+        //var_dump($empresas);
         return view('empresas/index', ['empresas' => $empresas]);
     }
 
@@ -114,7 +115,11 @@ class EmpresaController extends Controller
      */
     public function show($id)
     {
-        $empresa = Empresa::find($id);
+        //$empresa = Empresa::find($id);
+        $empresa = (new Empresa())->getMatriz($id);
+        \Session::put('idempresa', $empresa->id);
+        \Session::put('rfc' , $empresa->rfc);
+
         if ( $empresa) {
             $matrizConf = (new Empresa())->getConfig($id);
             $color = $matrizConf->color == 'rgb(61,82,112)';
@@ -125,15 +130,21 @@ class EmpresaController extends Controller
                 
                 $data = array(
                     'empresas' => $empresa,
-                    'mostrarSidebar' => $mostrarSidebar
+                    'mostrarSidebar' => $mostrarSidebar,
                 );
                 
                 return view('empresas.show', $data);
             
             }else{
                 $sucursal = (new Empresa())->getMatriz($id);
-                //var_dump($sucursales->sucursal);
-                return view('configuracion.edit', ['sucursal' => $sucursal->sucursal]);
+                $hasSello = count( Sucursal::getSellos($sucursal->id) ) > 0 ;
+                $hasLogo = $matrizConf->logo || $matrizConf->logotipo_srvpdf;
+                $data = array ( 
+                    'sucursal' => $sucursal->sucursal, 
+                    'hasSello' => $hasSello,
+                    'hasLogo' => $hasLogo );
+                
+                return view('configuracion.edit', $data );
             }
         }else{
             return Redirect::to('/home');

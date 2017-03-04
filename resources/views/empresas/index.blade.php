@@ -2,7 +2,7 @@
 @section('content')
     <div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
-            <div class="panel-heading">Listado de sucursales</div>
+            <div class="panel-heading">Listado de Empresas</div>
             <div class="panel-body">
 				<div class="container-fluid">
 					<ul class="list-group">

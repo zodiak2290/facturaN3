@@ -36,9 +36,11 @@
                     </button>
 
                     <!-- Branding Image -->
+                    @if ( isset($mostrarSidebar) ) 
                     <a class="navbar-brand" href="#menu-toggle" id="menu-toggle">
                          <span class="fui-list"> </span>
                     </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
@@ -131,6 +133,40 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
+<script type="text/javascript">
+    $(function() {
+
+      // We can attach the `fileselect` event to all file inputs on the page
+      $(document).on('change', ':file', function() {
+        var input = $(this),
+            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+        input.trigger('fileselect', [numFiles, label]);
+      });
+
+      // We can watch for our custom `fileselect` event like this
+      $(document).ready( function() {
+          $(':file').on('fileselect', function(event, numFiles, label) {
+
+              var input = $(this).parents('.input-group').find(':text'),
+                  log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+              if( input.length ) {
+                  input.val(log);
+              } else {
+                  if( log ) alert(log);
+              }
+
+          });
+      });
+      
+    });
+</script>
+<style>
+    .navbar-default{
+        background-color: #dbc3c7;
+    }
+</style>
 </body>
 </html>
 
