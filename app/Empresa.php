@@ -7,7 +7,7 @@ use DB;
 class Empresa extends Model
 {
     protected $hidden = [
-        'wst_url', 'wst_pass','wst_user','remover_sellos','importar_xls','status','created_at','updated_at', 'user_id', 'tipo_contribuyente_id'
+        'wst_url', 'wst_pass','wst_user','remover_sellos','importar_xls','status','created_at','updated_at', 'user_id'
     ];
 
     protected $fillable = [
@@ -56,14 +56,18 @@ class Empresa extends Model
         return $sucursalMatriz;
     }
 
-    public function getMatriz($id){
+    public function getMatriz($id, $getDom = false){
         $sucursalMatriz = DB::table('empresas')
-                ->join('sucursales', 'empresas.id','=', 'sucursales.empresa_id')
-                ->where('empresas.id', '=', $id)
+                ->join('sucursales', 'empresas.id','=', 'sucursales.empresa_id');
+        if( $getDom ){
+            $sucursalMatriz->join('domicilioSucursales', 'domicilioSucursales.sucursal_id', '=', 'sucursales.id');
+            $sucursalMatriz->join('datosExtraSucursal', 'datosExtraSucursal.sucursal_id', '=', 'sucursales.id');
+        }
+        $sucursal =    $sucursalMatriz->where('empresas.id', '=', $id)
                 ->where('isMatriz','=', true)
                 ->select('*')
                 ->get()->first();
-        return $sucursalMatriz;   
+        return $sucursal;   
     }
 
     public function getMatrices($userId)

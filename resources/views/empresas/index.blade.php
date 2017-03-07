@@ -9,7 +9,7 @@
 						@foreach ($empresas as $empresa)
 						  <li class="list-group-item">
 						    <span class="pull-right">
-								<a href="">	
+								<a href="{{ url('empresas').'/'.$empresa->id . '/edit' }}">	
 						    		<span class="fui-new" title="Editar Empresa"></span>
 						    	</a>
 								<a href="">	

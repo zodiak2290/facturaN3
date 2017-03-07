@@ -21,7 +21,7 @@
 												</a>
 											</li>
 											<li>
-												<a href="#profile" data-toggle="tab" title="Cargar logotipo"  @if( $hasLogo ) style="color: #3498DB" @else style="color: #C0392B"  @endif>
+												<a href="#profile" data-toggle="tab" title="Cargarrrr logotipo"  @if( $hasLogo ) style="color: #3498DB" @else style="color: #C0392B"  @endif>
 												<span class="round-tabs two">
 												<i class="fui-image"></i>
 												</span> 
@@ -34,7 +34,7 @@
 												</span> 
 												</a>
 											</li>
-											<
+											<li>
 												<a @if( $hasSello && $hasLogo )  
 														href="#doner" data-toggle="tab" style="color: #3498DB" 
 													@else 

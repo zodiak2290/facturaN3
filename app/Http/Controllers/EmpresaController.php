@@ -104,7 +104,7 @@ class EmpresaController extends Controller
             DB::rollBack();
         }
 
-        return Redirect::to('/home');
+        return Redirect::to('/empresas');
     }
 
     /**
@@ -159,7 +159,15 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        return view('empresas.edit', ['empresas' => Empresa::findOrFail($id)]);
+        $tipoContribuyentes = (new Empresa())->getTipoContribuyentes();
+        $estados = (new Empresa())->getEstados();
+
+        $data = array(
+            'contributentes' => $tipoContribuyentes,
+            'estados' => $estados,
+            'empresa' => (new Empresa())->getMatriz($id, true)
+        );
+        return view('empresas.edit', $data);
     }
 
     /**
@@ -172,13 +180,42 @@ class EmpresaController extends Controller
     public function update(EmpresaFormRequest $request, $id)
     {
         $empresa =  Empresa::findOrFail($id);
+        DB::beginTransaction();
         $empresa->rfc = $request->get('rfc');
         $empresa->drs = $request->get('drs');
-        $empresa->leyenda = $request->get('leyenda');
+        $empresa->leyenda = trim( $request->get('leyenda') );
         $empresa->tipo_contribuyente_id = $request->get('contribuyente'); 
         $empresa->regimen_fiscal = $request->get('regimen_fiscal');
-        $empresa->update();
-        return Redirect::to('/home');
+        $upEmpresa = $empresa->update();
+
+        $sucursal = (new Empresa())->getIdSucursal( $id );
+        $upDom = DB::table('domicilioSucursales')
+                    ->where('sucursal_id', $sucursal->id)
+                    ->update([
+                            'calle' => $request->get('calle'),
+                            'nume' => $request->get('nume'),
+                            'numi' => $request->get('numi'),
+                            'colonia' => $request->get('colonia'),
+                            'localidad' => $request->get('localidad'),
+                            'delom' => $request->get('municipio'),
+                            'cp' => $request->get('cp'),
+                            'estado_id' => $request->get('estado')
+                        ]);
+        $upDomEx = DB::table('datosExtraSucursal')
+                    ->where('sucursal_id', $sucursal->id)
+                    ->update([
+                            'entreca' => "",
+                            'telefono1' => $request->get('telefono'),
+                            'telefono2' =>  "",
+                            'email' => $request->get('email') 
+                    ]);
+
+        if($upEmpresa && $upDom && $upDomEx){
+            DB::commit();
+        }else{
+            DB::rollBack();
+        }
+        return Redirect::to('/empresas');
     }
 
     /**
