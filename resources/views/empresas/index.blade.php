@@ -1,6 +1,14 @@
 @extends('layouts.app')
 @section('content')
     <div class="col-md-8 col-md-offset-2">
+            @if ( session('message') )
+				<div class="alert alert-success">
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times</span>
+					</button>
+					{{ session('message') }}
+				</div>
+            @endif 
 		<div class="panel panel-default">
             <div class="panel-heading">Listado de Empresas</div>
             <div class="panel-body">

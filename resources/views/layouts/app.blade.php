@@ -152,9 +152,9 @@
                   log = numFiles > 1 ? numFiles + ' files selected' : label;
 
               if( input.length ) {
-                  input.val(log);
+                  //input.val(log);
               } else {
-                  if( log ) alert(log);
+                  //if( log ) alert(log);
               }
 
           });

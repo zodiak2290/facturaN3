@@ -104,7 +104,7 @@ class EmpresaController extends Controller
             DB::rollBack();
         }
 
-        return Redirect::to('/empresas');
+        return Redirect::to('/empresas')->with('message', 'Empresa registrada exitosamente!');
     }
 
     /**
@@ -215,7 +215,7 @@ class EmpresaController extends Controller
         }else{
             DB::rollBack();
         }
-        return Redirect::to('/empresas');
+        return Redirect::to('/empresas')->with('message', 'Empresa editada exitosamente!');;
     }
 
     /**

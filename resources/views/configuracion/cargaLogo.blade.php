@@ -1,7 +1,8 @@
 <h4 class="head text-center"> 
   Cargar Logotipo 
 </h4>
-<form>
+<form id="formlogo" name="formlogo" method="post" action="/uploadlogo" enctype="multipart/form-data">
+{{ Form::token() }} 
   <div class="form-group">
     <div class="col-lg-12">
       <div class="file-tab panel-body">
@@ -9,7 +10,6 @@
           <button type="button" class="btn btn-info btn-file">
           	<input type="file" name="file-input">
           </button>
-          <button type="button" class="btn btn-danger">Remove</button>
         </div>
       </div>
       <div class="col-lg-12">
@@ -21,4 +21,4 @@
       </div>
     </div>
   </div>
-</form
+</form>

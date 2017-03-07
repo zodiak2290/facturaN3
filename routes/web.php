@@ -22,3 +22,4 @@ Route::get('/home', 'HomeController@index');
 Route::resource('empresas', 'EmpresaController');
 
 Route::post('uploadcert', 'CertificadoController@index');
+Route::post('uploadlogo', 'logo\LogoController@index');

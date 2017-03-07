@@ -16,7 +16,7 @@
 		        	
 				</div>
 				<div class="text-center">
-					<a href="{{ url('/home') }}" class=" btn btn-danger"> Cancelar </a>	
+					<a href="{{ url('/empresas') }}" class=" btn btn-danger"> Cancelar </a>	
 				</div>
 				
 			</div>

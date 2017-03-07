@@ -3,7 +3,14 @@
 @section('content')
     <div class="col-md-8 col-md-offset-2">
 		<div class="panel panel-default">
-            <div class="panel-heading">Asistente de configuración</div>
+            <div class="panel-heading">
+            	Asistente de configuración
+            	<div class="row">
+					<div class="pull-right" style="margin: 1%;" >
+						<a href="{{ url('/empresas') }}" class=" btn btn-default" style="border-radius: 40%;"> Regresar </a>	
+					</div>	
+				</div>
+            </div>
             <div class="panel-body">
 				<div class="container-fluid">
 					<section >
@@ -21,7 +28,7 @@
 												</a>
 											</li>
 											<li>
-												<a href="#profile" data-toggle="tab" title="Cargarrrr logotipo"  @if( $hasLogo ) style="color: #3498DB" @else style="color: #C0392B"  @endif>
+												<a href="#profile" data-toggle="tab" title="Cargar logotipo"  @if( $hasLogo ) style="color: #3498DB" @else style="color: #C0392B"  @endif>
 												<span class="round-tabs two">
 												<i class="fui-image"></i>
 												</span> 
@@ -57,7 +64,7 @@
 											@include('configuracion.cargaLogo')
 										</div>
 										<div class="tab-pane fade" id="settings">
-											
+											@include('configuracion.general')
 										</div>
 										<div class="tab-pane fade" id="doner">
 
